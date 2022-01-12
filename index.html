@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/dist/style.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="preload" as="image" href="assets/carousel/10efb5c7a046354da997_Main-page-banner-bunda-01-crop.png" />
+    <link rel="preload" as="image" href="assets/carousel/10efb5c7a046354da997_Main-page-banner-bunda-01.jpg" />
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  </head>
+
+  <body class="bg-gray-500">
+    <header>
+      <div id="mainHeader" class="bg-gray-700">
+        <div class="container text-white mx-auto h-full flex justify-between items-center px-3">
+          <div id="logo" class="text-2xl font-bold min-w-fit"><i class="fas fa-torii-gate bg-red-500 p-3 mr-4"></i><a href="index.html">Redshop</a></div>
+          <div class="flex gap-6 md:gap-10 items-center justify-end">
+            <div id="search" class="relative hidden md:block">
+              <input class="border-none rounded p-2.5 text-gray-700 focus:outline-none" type="text" placeholder="Vyhladať produkt..." id="hladať" />
+              <a class="absolute top-1/2 bg-white rounded -translate-y-1/2 right-0 pr-3 w-10 h-full flex items-center justify-center" href="#"><i class="text-gray-700/30 text-xl fas fa-chevron-right"></i></a>
+            </div>
+            <a href="#" id="searchIcon" class="text-xl block md:hidden"><i class="fas fa-search mr-1 text-2xl"></i></a>
+            <a href="kosik.html" id="cart" class="min-w-fit text-xl"><i class="fas fa-shopping-cart mr-1 text-2xl"></i><span class="hidden md:inline pl-3">Košík</span></a>
+          </div>
+        </div>
+      </div>
+      <div id="menu" class="bg-rose-700 text-white flex gap-5 justify-center items-center md:hidden cursor-pointer select-none">
+        <div id="menuIcon" class="flex justify-center gap-2 items-center flex-col">
+          <div class="line-1 bg-white/80 w-10 h-1"></div>
+          <div class="line-2 bg-white/80 w-10 h-1"></div>
+          <div class="line-3 bg-white/80 w-10 h-1"></div>
+        </div>
+        <span class="uppercase font-semibold text-3xl text-white/80">Menu</span>
+      </div>
+      <div id="menuEntries" class="bg-rose-700 -top-64">
+        <ul class="container mx-auto gap-6 md:gap-4 h-full leading-10 md:leading-normal justify-around items-center my-4 md:my-0 text-white/80 flex-col flex md:flex-row">
+          <li>Pánske oblečenie</li>
+          <li>Dámske oblečenie</li>
+          <li>Spodné prádlo</li>
+          <li>Doplnky</li>
+          <li>Novinky</li>
+          <li>Výpredaj</li>
+        </ul>
+      </div>
+    </header>
+    <main class="bg-slate-300">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="carousel-background"><img src="assets/carousel/photo-1523381294911-8d3cead13475.jpg" alt="" /></div>
+          <div class="carousel-content">
+            <img class="carousel-image" src="assets/carousel/photo-1523381294911-8d3cead13475.jpg" alt="" />
+            <div class="carousel-text top-1/2 -translate-y-1/2 w-full lg:top-[65%] lg:max-w-4xl text-center bg-white/60 p-12">
+              <h2 class="text-black/60 font-semibold text-center text-4xl mb-4">Tričká pre každého</h2>
+              <p class="text-gray-800 text-lg">V prípade, že by vám tričko predsa-len nesadlo, tak garantujeme okamžitú výmenu alebo vrátenie peňazí.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-background"><img src="assets/carousel/3645515.jpg" alt="" /></div>
+          <div class="carousel-content">
+            <img class="carousel-image" src="assets/carousel/3645515.jpg" alt="" />
+            <div class="carousel-text translate-x-1/2 right-1/2 top-1/2 -translate-y-1/2 w-full lg:w-[80%] text-center bg-black/70 p-12">
+              <h2 class="text-white font-semibold text-center text-4xl mb-4">Nahoďte sa do gala s vianočnou kolekciou</h2>
+              <p class="text-stone-200">Hlavnou myšlienkou a témou vianočnej kolekcie je radosť, čo sa odráža na módnych outfitoch a najnovších trendoch. A ak ešte stále netušíte, čo darovať svojim najbližším tento rok pod stromček, máme pre vás skvelé tipy a kreatívne riešenia pre celú rodinu. Nechajte sa inšpirovať!</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item carousel-active">
+          <div class="carousel-background"><img src="assets/carousel/10efb5c7a046354da997_Main-page-banner-bunda-01.jpg" alt="" /></div>
+          <div class="carousel-content">
+            <img class="carousel-image" src="assets/carousel/10efb5c7a046354da997_Main-page-banner-bunda-01.jpg" alt="" />
+            <img class="index z-30 absolute top-46 left-[100px] w-[430px] xl:left-[290px] hidden lg:block" src="assets/carousel/10efb5c7a046354da997_Main-page-banner-bunda-01-crop.png" alt="" />
+            <div class="carousel-text top-1/2 -translate-y-1/2 lg:translate-y-0 lg:top-48 right-0 w-full lg:w-8/12 text-center bg-black/30 p-12 lg:pl-56">
+              <h2 class="text-white font-semibold text-center text-5xl mb-4">Vyberte sa do prírody</h2>
+              <p class="text-stone-200">Funkčné a elegantné zimné bundy aj do tej najtuhšej zimy</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-navigation">
+          <button class="carousel-previous-button text-white/60 text-6xl"><i class="fas fa-chevron-left"></i></button>
+          <button class="carousel-next-button text-white/60 text-6xl"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <section id="tips" class="container mx-auto gap-6 lg:gap-0 h-full grid grid-cols-2 lg:grid-cols-4 justify-evenly p-10 lg:py-7 items-start text-center">
+        <div>
+          <i class="text-2xl mb-2 bg-slate-200 rounded-full p-2 fas fa-dolly"></i>
+          <p class="text-gray-700">Doprava zdarma</p>
+        </div>
+        <div>
+          <i class="text-2xl mb-2 bg-slate-200 rounded-full p-2 fas fa-shipping-fast"></i>
+          <p class="text-gray-700">Dodanie hneď na druhý deň</p>
+        </div>
+        <div>
+          <i class="text-2xl mb-2 bg-slate-200 rounded-full p-2 fas fa-exchange-alt"></i>
+          <p class="text-gray-700 block min-w-fit">Okamžitá výmena alebo vrátenie do 14 dní</p>
+        </div>
+        <div>
+          <i class="text-2xl mb-2 bg-slate-200 rounded-full p-2 fas fa-thumbs-up"></i>
+          <p class="text-gray-700">Kvalitné materiály oblečenia</p>
+        </div>
+      </section>
+      <section class="bg-slate-200 py-4">
+        <div class="container mx-auto">
+          <header class="pt-4">
+            <h2 class="bg-rose-600 uppercase text-white p-2 w-fit mx-auto text-2xl">Najoblúbenejšie kategórie</h2>
+          </header>
+          <section class="mt-4 p-8 pt-11 bg-slate-50 text-center">
+            <ul id="favoriteCategories" class="flex flex-wrap gap-10 justify-around items-center">
+              <li class="w-64 bg-white shadow-md p-4">
+                <img src="https://im9.cz/sk/iR/importprodukt-orig/167/1674b6a184c8612f3bc2840e50ea717b--mmf400x400.jpg" alt="" />
+                <p class="mt-3 text-xl">Mikiny</p>
+              </li>
+              <li class="w-64 bg-white shadow-md p-4">
+                <img src="https://im9.cz/sk/iR/importprodukt-orig/167/1674b6a184c8612f3bc2840e50ea717b--mmf400x400.jpg" alt="" />
+                <p class="mt-3 text-xl">Mikiny</p>
+              </li>
+              <li class="w-64 bg-white shadow-md p-4">
+                <img src="https://im9.cz/sk/iR/importprodukt-orig/167/1674b6a184c8612f3bc2840e50ea717b--mmf400x400.jpg" alt="" />
+                <p class="mt-3 text-xl">Mikiny</p>
+              </li>
+              <li class="w-64 bg-white shadow-md p-4">
+                <img src="https://im9.cz/sk/iR/importprodukt-orig/167/1674b6a184c8612f3bc2840e50ea717b--mmf400x400.jpg" alt="" />
+                <p class="mt-3 text-xl">Mikiny</p>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </main>
+    <footer id="mainFooter" class="bg-gray-700 bottom-0 flex justify-center items-center text-stone-100">&copy; Vojtech Molnár 2021</footer>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+.carousel {
+  @apply relative overflow-hidden bg-black pt-[var(--carousel-height)];
+}
+.carousel-item {
+  @apply absolute top-0 h-[var(--carousel-height)];
+}
+
+.carousel-background {
+  @apply w-[100vw];
+  img {
+    @apply -z-50 w-[100vw] h-[var(--carousel-height)] object-cover select-none;
+    filter: blur(8px) brightness(50%);
+    transform: scale(1.03);
+    -webkit-user-drag: none;
+  }
+}
+.carousel-content {
+  @apply absolute top-0 left-[50%] -translate-x-1/2 h-[var(--carousel-height)];
+  width: min(var(--carousel-width), 100vw);
+  .carousel-image {
+    @apply absolute w-[var(--carousel-width)] h-[var(--carousel-height)] object-cover;
+  }
+  .carousel-text {
+    @apply absolute;
+  }
+  img {
+    @apply select-none;
+    -webkit-user-drag: none;
+  }
+}
+.carousel-navigation {
+  @apply absolute top-0 left-[50%] -translate-x-1/2 h-[var(--carousel-height)] w-[var(--navigation-width)] z-20 pointer-events-none;
+  @media (max-width: calc(var(--navigation-width) + 50px)) {
+    display: none;
+  }
+  .carousel-previous-button {
+    @apply absolute left-0 top-[42.5%] pointer-events-auto;
+  }
+  .carousel-next-button {
+    @apply absolute right-0 -mr-4 top-[42.5%] pointer-events-auto;
+  }
+}
+.carousel-active-background {
+  @apply z-10;
+}
+.carousel-active {
+  @apply z-20;
+}

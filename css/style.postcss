@@ -1,0 +1,35 @@
+@import '_variables.postcss';
+@import '_carousel.postcss';
+@import '_tailwind.postcss';
+@import '_menu.postcss';
+
+body {
+  ::selection {
+    @apply text-white bg-red-600/70;
+  }
+}
+
+#mainHeader {
+  @apply absolute top-0 w-full z-40 h-[var(--main-header-height)];
+}
+
+main {
+  min-height: calc(100vh - var(--menu-height) - var(--main-header-height));
+  margin-top: calc(var(--menu-height)+ var(--main-header-height));
+}
+
+#mainFooter {
+  @apply h-[var(--footer-height)];
+}
+
+#tips {
+  transition: all ease 1s;
+  div {
+    transition: all ease-in 0.3s;
+  }
+}
+#favoriteCategories {
+  li {
+    transition: all linear 0.3s;
+  }
+}
