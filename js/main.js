@@ -159,6 +159,7 @@ const elementsFadeIn = (elements, duration) => {
   });
   fadeInElements();
 };
+
 document.addEventListener('DOMContentLoaded', () => {
   const carousel = new Carousel(800, 5000);
   carousel.startInterval();
