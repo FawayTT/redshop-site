@@ -2,7 +2,7 @@
   @apply relative overflow-hidden bg-black pt-[var(--carousel-height)];
 }
 .carousel-item {
-  @apply absolute top-0 h-[var(--carousel-height)];
+  @apply absolute top-0 h-[var(--carousel-height)] opacity-0;
 }
 
 .carousel-background {
@@ -41,8 +41,8 @@
   }
 }
 .carousel-active-background {
-  @apply z-10;
+  @apply z-10 opacity-100;
 }
 .carousel-active {
-  @apply z-20;
+  @apply z-20 opacity-100;
 }

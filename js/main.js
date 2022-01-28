@@ -1,164 +1,182 @@
-let stopped = false;
-const carousel = (length, interval) => {
-  let position = $('.carousel-item.carousel-active').index();
-  let newImage = 0;
-  const item = $('.carousel-item');
-  let carouselInterval = null;
-  let startInterval = null;
-  const stopInterval = () => {
-    clearInterval(carouselInterval);
-  };
-  const carouselNext = () => {
-    if (!stopped) {
-      stopInterval();
-      $('.carousel-next-button').attr('disabled', true);
-      setTimeout(() => {
-        $('.carousel-next-button').removeAttr('disabled');
-      }, length + 100);
-      if (position >= item.length - 1) {
-        newImage = 0;
-      } else {
-        newImage = position + 1;
-      }
-      item.eq(position).addClass('carousel-active-background');
-      item.eq(position).removeClass('carousel-active');
-      item.eq(newImage).fadeOut(0, () => {
-        item.eq(newImage).addClass('carousel-active');
-      });
-      item.eq(newImage).fadeIn(length, () => {
-        item.eq(position).fadeOut();
-        item.eq(position).removeClass('carousel-active-background');
-        if (position === item.length - 1) {
-          position = 0;
-        } else {
-          position += 1;
-        }
-        startInterval();
-      });
-    }
-  };
-  const carouselPrevious = () => {
-    stopInterval();
-    $('.carousel-previous-button').attr('disabled', true);
-    setTimeout(() => {
-      $('.carousel-previous-button').removeAttr('disabled');
-    }, length + 100);
-    if (position <= 0) {
-      newImage = item.length - 1;
-    } else {
-      newImage = position - 1;
-    }
-    item.eq(position).addClass('carousel-active-background');
-    item.eq(position).removeClass('carousel-active');
-    item.eq(newImage).fadeOut(0, () => {
-      item.eq(newImage).addClass('carousel-active');
-    });
-    item.eq(newImage).fadeIn(length, () => {
-      item.eq(position).fadeOut();
-      item.eq(position).removeClass('carousel-active-background');
-      if (position <= 0) {
-        position = item.length;
-      }
-      position -= 1;
-      startInterval();
-    });
-  };
-  startInterval = () => {
-    carouselInterval = setInterval(carouselNext, interval);
-  };
-  startInterval();
-  $('.carousel-next-button').on('click', carouselNext);
-  $('.carousel-previous-button').on('click', carouselPrevious);
-};
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) {
-    stopped = true;
-  } else {
-    stopped = false;
+class Carousel {
+  constructor(length, interval) {
+    this.length = length;
+    this.interval = interval;
+    this.item = document.querySelectorAll('.carousel-item'); // $('.carousel-item .carousel-active').index()
+    this.positionNextImage = 0;
+    this.carouselInterval = null;
+    this.getPosition();
   }
-});
 
-const responsiveMenu = () => {
-  const menu = $('#menu');
-  const menuEntries = $('#menuEntries');
-  const menuIcon = $('#menuIcon');
-  let clicked = false;
-  menu.on('click', () => {
-    if (!clicked) {
-      menuEntries.addClass('menu-entries-animation');
-      menuIcon.addClass('menu-icon-animation');
-      clicked = true;
+  getPosition() {
+    let index = 0;
+    this.item.forEach((element) => {
+      if (element.classList.contains('carousel-active')) {
+        return;
+      }
+      index += 1;
+    });
+    this.position = index;
+  }
+
+  startInterval() {
+    this.carouselInterval = setInterval(() => {
+      this.nextFrame();
+    }, this.interval);
+  }
+
+  stopInterval() {
+    clearInterval(this.carouselInterval);
+  }
+
+  buttonTimeout(button) {
+    document.querySelector(button).disabled = true;
+    setTimeout(() => {
+      document.querySelector(button).disabled = false;
+    }, this.length + 100);
+  }
+
+  nextFrame() {
+    this.stopInterval();
+    this.buttonTimeout('.carousel-next-button');
+    if (this.position >= this.item.length - 1) {
+      this.positionNextImage = 0;
     } else {
-      menuEntries.removeClass('menu-entries-animation');
-      menuIcon.removeClass('menu-icon-animation');
-      clicked = false;
+      this.positionNextImage = this.position + 1;
     }
+    this.item[this.position].classList.add('carousel-active-background');
+    this.item[this.position].classList.remove('carousel-active');
+    this.item[this.positionNextImage].style.opacity = 0;
+    this.item[this.positionNextImage].classList.add('carousel-active');
+    this.item[this.positionNextImage].style.transition = `opacity ${this.length / 1000}s`;
+    this.item[this.positionNextImage].style.opacity = 1;
+    setTimeout(() => {
+      this.item[this.positionNextImage].style.transition = '';
+      this.item[this.position].style.opacity = 0;
+      this.item[this.position].classList.remove('carousel-active-background');
+      if (this.position === this.item.length - 1) {
+        this.position = 0;
+      } else {
+        this.position += 1;
+      }
+      this.startInterval();
+    }, this.length);
+  }
+
+  previousFrame() {
+    this.stopInterval();
+    this.buttonTimeout('.carousel-previous-button');
+    if (this.position <= 0) {
+      this.positionNextImage = this.item.length - 1;
+    } else {
+      this.positionNextImage = this.position - 1;
+    }
+    this.item[this.position].classList.add('carousel-active-background');
+    this.item[this.position].classList.remove('carousel-active');
+    this.item[this.positionNextImage].style.opacity = 0;
+    this.item[this.positionNextImage].classList.add('carousel-active');
+    this.item[this.positionNextImage].style.transition = `opacity ${this.length / 1000}s`;
+    this.item[this.positionNextImage].style.opacity = 1;
+    setTimeout(() => {
+      this.item[this.positionNextImage].style.transition = '';
+      this.item[this.position].style.opacity = 0;
+      this.item[this.position].classList.remove('carousel-active-background');
+      if (this.position <= 0) {
+        this.position = this.item.length;
+      }
+      this.position -= 1;
+      this.startInterval();
+    }, this.length);
+  }
+}
+const responsiveMenu = () => {
+  document.getElementById('menu').addEventListener('click', () => {
+    document.getElementById('menuEntries').classList.toggle('menu-entries-animation');
+    document.getElementById('menuIcon').classList.toggle('menu-icon-animation');
   });
 };
 
 const search = () => {
-  const logo = $('#logo');
-  const cart = $('#cart');
-  const searchBar = $('#search');
-  const searchIcon = $('#searchIcon');
-  const searchIconSVG = $('#searchIcon > i');
-  const mainHeaderContainer = $('#mainHeader > .container');
+  const searchIcon = document.getElementById('searchIcon');
+  const searchIconSVG = document.querySelector('#searchIcon > i');
+  const searchInput = document.getElementById('search');
+  const container = document.querySelector('#mainHeader > .container');
+  const logo = document.getElementById('logo');
+  const cart = document.getElementById('cart');
   let clicked = false;
-  searchIcon.on('click', () => {
-    if (!clicked) {
-      mainHeaderContainer.removeClass('justify-between').addClass('justify-center');
-      searchIconSVG.removeClass('fa-search').addClass('fa-times text-3xl');
-      searchBar.removeClass('hidden');
-      logo.addClass('hidden');
-      cart.addClass('hidden');
-      clicked = true;
-    } else {
-      mainHeaderContainer.removeClass('justify-center').addClass('justify-between');
-      searchIconSVG.removeClass('fa-times text-3xl').addClass('fa-search');
-      searchBar.addClass('hidden');
-      logo.removeClass('hidden');
-      cart.removeClass('hidden');
+  searchIcon.addEventListener('click', () => {
+    if (clicked) {
+      container.classList.remove('justify-center');
+      container.classList.add('justify-between');
+      searchIconSVG.classList.remove('fa-times', 'text-3xl');
+      searchIconSVG.classList.add('fa-search');
+      searchInput.classList.add('hidden');
+      logo.classList.remove('hidden');
+      cart.classList.remove('hidden');
       clicked = false;
+    } else {
+      container.classList.remove('justify-between');
+      container.classList.add('justify-center');
+      searchIconSVG.classList.remove('fa-search');
+      searchIconSVG.classList.add('fa-times', 'text-3xl');
+      searchInput.classList.remove('hidden');
+      logo.classList.add('hidden');
+      cart.classList.add('hidden');
+      clicked = true;
     }
-  });
-  searchBar.on('blur', () => {
-    searchBar.addClass('hidden');
   });
 };
 
 // effect is done through css transitions
 const elementsFadeIn = (elements, duration) => {
   const items = elements;
-  const topOfElement = items.offset().top;
-  const bottomOfElement = items.offset().top + items.outerHeight();
-  let topOfScreen = $(window).scrollTop();
-  let bottomOfScreen = $(window).scrollTop() + $(window).innerHeight();
+  let elementTop = items[0].getBoundingClientRect().top;
+  let windowHeight = window.innerHeight;
   let done = false;
 
   const fadeInElements = () => {
     let i = 0;
-    if (bottomOfScreen > topOfElement && topOfScreen < bottomOfElement) {
+    windowHeight = window.innerHeight;
+    elementTop = items[0].getBoundingClientRect().top;
+    if (elementTop < windowHeight) {
       const fadeInterval = setInterval(() => {
-        items.eq(i).addClass('!opacity-100');
+        items[i].classList.add('!opacity-100');
         i += 1;
+        if (i === items.length) {
+          clearInterval(fadeInterval);
+        }
       }, duration);
-      if (i === items.length) {
-        clearInterval(fadeInterval);
-      }
       done = true;
     }
   };
   for (let i = 0; i < items.length; i += 1) {
-    items.eq(i).addClass('opacity-0');
+    items[i].classList.add('opacity-0');
   }
-  $(window).on('scroll', () => {
-    topOfScreen = $(window).scrollTop();
-    bottomOfScreen = $(window).scrollTop() + $(window).innerHeight();
+  window.addEventListener('scroll', () => {
     if (!done) {
       fadeInElements();
     }
   });
   fadeInElements();
 };
-
-$(carousel(400, 5000), responsiveMenu(), search(), elementsFadeIn($('#tips > div'), 400), elementsFadeIn($('#favoriteCategories > li'), 200));
+document.addEventListener('DOMContentLoaded', () => {
+  const carousel = new Carousel(800, 5000);
+  carousel.startInterval();
+  document.getElementsByClassName('carousel-next-button')[0].addEventListener('click', () => {
+    carousel.nextFrame();
+  });
+  document.getElementsByClassName('carousel-previous-button')[0].addEventListener('click', () => {
+    carousel.previousFrame();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      carousel.stopInterval();
+    } else {
+      carousel.startInterval();
+    }
+  });
+  responsiveMenu();
+  search();
+  elementsFadeIn(document.querySelectorAll('#tips > div'), 400);
+  elementsFadeIn(document.querySelectorAll('#favoriteCategories > li'), 200);
+});
