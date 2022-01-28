@@ -30,7 +30,7 @@
 }
 .carousel-navigation {
   @apply absolute top-0 left-[50%] -translate-x-1/2 h-[var(--carousel-height)] w-[var(--navigation-width)] z-20 pointer-events-none;
-  @media (max-width: calc(var(--navigation-width) + 50px)) {
+  @media (max-width: 1650px) /* Navigation minimal width */ {
     display: none;
   }
   .carousel-previous-button {
